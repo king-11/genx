@@ -1,0 +1,14 @@
+[package]
+name = "genx"
+version = "0.1.0"
+authors = ["Lakshya Singh <lakshay.singh1108@gmail.com>"]
+edition = "2018"
+description = "A genetic algorithms library."
+repository = "https://github.com/king-11/genx"
+readme = "README.md"
+license-file = "LICENSE"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rand = "0.8.4"
