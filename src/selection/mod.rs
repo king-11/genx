@@ -6,4 +6,6 @@ pub mod roulette_wheel;
 
 pub mod steady_state;
 
+pub mod stochastic_universal;
+
 pub mod tournament;
