@@ -3,10 +3,19 @@ name = "genx"
 version = "0.1.0"
 authors = ["Lakshya Singh <lakshay.singh1108@gmail.com>"]
 edition = "2018"
-description = "A genetic algorithms library."
+include = [
+  "src/**/*",
+  "Cargo.toml",
+  "README.md",
+  "LICENSE"
+]
+homepage = "https://github.com/king-11/genx"
+documenation = "https://github.com/king-11/genx"
+description = "An easy to use and modular genetic algorithms library."
 repository = "https://github.com/king-11/genx"
+keywords = ["genetic", "evolutionary", "algorithm", "selection", "mutation"]
 readme = "README.md"
-license-file = "LICENSE"
+license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
