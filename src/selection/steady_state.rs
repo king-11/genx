@@ -1,4 +1,4 @@
-use std::cmp::{Ordering, max};
+use std::cmp::{Ordering, min};
 
 pub fn steady_state_selection(fitness_values: &Vec<f32>, num_parents: usize) -> Vec<usize> {
   let mut fitness_values_with_index : Vec<(f32, usize)> = Vec::new();
@@ -8,5 +8,5 @@ pub fn steady_state_selection(fitness_values: &Vec<f32>, num_parents: usize) -> 
   };
   fitness_values_with_index.sort_unstable_by(|a, b| b.partial_cmp(a).unwrap_or(Ordering::Equal));
   let selected_indices = fitness_values_with_index.iter().map(|&a| a.1).collect::<Vec<usize>>();
-  selected_indices[0..max(num_parents, population_size)].to_vec()
+  selected_indices[0..min(num_parents, population_size)].to_vec()
 }
