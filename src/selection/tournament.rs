@@ -12,7 +12,7 @@ pub fn tournament_selection(fitness_values: &Vec<f32>, num_parents: usize, tourn
       let mut rng = thread_rng();
       let mut current_tournament = fitness_values_with_index.choose_multiple(&mut rng, tournament_size).cloned().collect::<Vec<(f32, usize)>>();
       current_tournament.sort_unstable_by(|a, b| b.partial_cmp(a).unwrap_or(Ordering::Equal));
-      selected_indices.push(current_tournament[tournament_size-1].1);
+      selected_indices.push(current_tournament[0].1);
   };
 
   selected_indices
