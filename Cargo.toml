@@ -1,6 +1,6 @@
 [package]
 name = "genx"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["Lakshya Singh <lakshay.singh1108@gmail.com>"]
 edition = "2018"
 include = [
@@ -10,7 +10,7 @@ include = [
   "LICENSE"
 ]
 homepage = "https://github.com/king-11/genx"
-documenation = "https://github.com/king-11/genx"
+documentation = "https://docs.rs/genx/0.2.1"
 description = "An easy to use and modular genetic algorithms library."
 repository = "https://github.com/king-11/genx"
 keywords = ["genetic", "evolutionary", "algorithm", "selection", "mutation"]
