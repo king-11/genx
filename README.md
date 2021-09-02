@@ -13,8 +13,6 @@ The vision for genx is to be a __flexible__ and greatly __extensible__ library f
 
 The implementation is split into __building blocks__ which are all represented by traits. This crate provides most common and probably all possible implementation for all building blocks. So it can be used for many problems out of the box.
 
-[Documentation](https://docs.rs/genx/0.2.1)
-
 ## Basic Example
 
 ### Selection
