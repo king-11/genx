@@ -8,6 +8,7 @@ genx is written in Rust. The library's API utilizes functional programming parad
 ## Features
 
 - [Selection](./src/selection)
+- [Mutation](./src/mutation)
 
 ## Documentation
 
