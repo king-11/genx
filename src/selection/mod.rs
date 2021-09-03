@@ -27,3 +27,11 @@ pub mod steady_state;
 pub mod stochastic_universal;
 
 pub mod tournament;
+
+// Re-exports
+pub use self::random::random_selection;
+pub use self::rank::rank_selection;
+pub use self::roulette_wheel::roulette_wheel_selection;
+pub use self::steady_state::steady_state_selection;
+pub use self::stochastic_universal::stochastic_universal_selection;
+pub use self::tournament::tournament_selection;

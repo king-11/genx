@@ -41,3 +41,11 @@ pub mod random;
 pub mod scramble;
 
 pub mod swap;
+
+// Re-exports
+pub use self::flipping::flipping_mutation;
+pub use self::inversion::inversion_mutation;
+pub use self::polynomial::polynomial_mutation;
+pub use self::random::random_mutation;
+pub use self::scramble::scramble_mutation;
+pub use self::swap::swap_mutation;
