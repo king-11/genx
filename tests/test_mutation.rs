@@ -2,7 +2,7 @@ extern crate genx;
 
 #[cfg(test)]
 mod tests {
-  use genx::mutation::{flipping::flipping_mutation, inversion::inversion_mutation, polynomial::polynomial_mutation, random::random_mutation, scramble::scrable_mutation, swap::swap_mutation};
+  use genx::mutation::{flipping::flipping_mutation, inversion::inversion_mutation, polynomial::polynomial_mutation, random::random_mutation, scramble::scramble_mutation, swap::swap_mutation};
 
   #[test]
   fn test_inversion_mutation() {
@@ -17,7 +17,7 @@ mod tests {
   fn test_scramble_mutation() {
     let mut individual = vec![false, true, false, false, true, true, true, false, false, true, false];
     let original_individual = individual.clone();
-    scrable_mutation(&mut individual, Some(43));
+    scramble_mutation(&mut individual, Some(43));
     assert_eq!(individual, [false, true, false, false, true, false, false, true, true, true, false]);
     assert_ne!(original_individual, individual);
   }

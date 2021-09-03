@@ -2,7 +2,7 @@ use std::{mem::swap};
 
 use rand::{Rng, SeedableRng, rngs::StdRng, seq::SliceRandom};
 
-pub fn scrable_mutation(individual: &mut Vec<bool>, seed: Option<u64>) {
+pub fn scramble_mutation(individual: &mut Vec<bool>, seed: Option<u64>) {
   let mut prng = match seed {
     Some(val) => StdRng::seed_from_u64(val),
     None => StdRng::from_entropy()
