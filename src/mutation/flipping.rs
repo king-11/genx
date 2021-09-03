@@ -10,7 +10,7 @@ pub fn flipping_mutation(individual: &mut Vec<bool>, mutation_probability: f32, 
     None => StdRng::from_entropy()
   };
   for val in individual.iter_mut() {
-    let random_probability = prng.gen_range(0.0..=100.0) / 100.0;
+    let random_probability = prng.gen_range(0.0..1.0);
     if random_probability < mutation_probability {
       *val = !(*val);
     }

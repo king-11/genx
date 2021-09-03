@@ -79,7 +79,7 @@ mod tests {
   #[test]
   fn test_polynomial_mutation() {
     let individual = 29.11;
-    let result = polynomial_mutation(individual, 4.2, Some(43));
+    let result = polynomial_mutation(individual, 4.2, 4.0, Some(43));
     assert_ne!(result, individual);
   }
 }
