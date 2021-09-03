@@ -26,7 +26,6 @@ pub fn stochastic_universal_selection(fitness_values: &Vec<f32>, num_parents: us
       current_offset += 1;
     }
     selected_indices.push(current_offset);
-    current_offset += 1;
     random_offset += fitness_step;
   };
   selected_indices
