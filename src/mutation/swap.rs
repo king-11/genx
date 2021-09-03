@@ -1,5 +1,23 @@
 use rand::{rngs::StdRng, SeedableRng, seq::SliceRandom};
 
+/**
+## Description
+Swap mutation is a mutation only for binary encoded individuals.
+Given the `individual` it randomly generates two indices and then swaps the value at those two indices.
+
+_Note: The function can also take in an optional `seed` value of type `Option<u64>` for deterministic results._
+
+## Example
+```rust
+  use genx::mutation::swap_mutation;
+  let mut individual = vec![false, true, false, false,
+                            true, true, true, false, false, true, false,
+                            false, true, false, false, true];
+  let original_individual = individual.clone();
+  swap_mutation(&mut individual, Some(11));
+  assert_ne!(original_individual, individual);
+```
+*/
 pub fn swap_mutation(individual: &mut Vec<bool>, seed: Option<u64>) -> Result<(), &'static str> {
   let mut prng = match seed {
     Some(val) => StdRng::seed_from_u64(val),

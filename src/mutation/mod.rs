@@ -14,7 +14,8 @@
 //!
 //! All the mutation functions for binary encoded schema
 //! take in atleast an argument of mutable reference to
-//! the boolean vector of individual to mutate.
+//! the boolean vector of individual to mutate. Hence they
+//! change the actual boolean Vector.
 //!
 //! Only those functions where, there is a need to constrain
 //! range of values that can be provided as argument will return

@@ -15,6 +15,8 @@
 //! point values that contains fitness values of individuals, and
 //! number of individuals to select. Finally functions return indices of
 //! selected individuals.
+//!
+//! You can read more about selection schemas and their working from the [wikipedia page](https://en.wikipedia.org/wiki/Selection_(genetic_algorithm))
 
 pub mod random;
 
