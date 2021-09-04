@@ -40,8 +40,9 @@ let result = stochastic_universal_selection(&fitness_values, num_parents, None)
 Mutation function takes in a single individual, distribution index and returns in the mutated individual using [polynomial mutation](https://www.iitk.ac.in/kangal/papers/k2012016.pdf) for real valued individual.
 
 ```rust
+use genx::mutation::polynomial::polynomial_mutation;
 let individual = 29.11;
-let result = polynomial_mutation(individual, 4.2, None);
+let result = polynomial_mutation(individual, 4.2, 4.0, None);
 ```
 
 The returned value may or may not be equal as is mutated based on a randomly generated value, which for deterministic results can be seeded.
