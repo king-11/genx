@@ -20,3 +20,4 @@ license = "MIT"
 
 [dependencies]
 rand = "0.8.4"
+itertools = "0.10.1"
