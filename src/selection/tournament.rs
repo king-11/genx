@@ -36,7 +36,7 @@ pub fn tournament_selection(fitness_values: &Vec<f32>, num_parents: usize, tourn
         Some(val) => StdRng::seed_from_u64(val*(idx as u64)),
         None => StdRng::from_entropy()
       };
-      let mut current_tournament = fitness_values_with_index.choose_multiple(&mut prng, min(tournament_size, number_individuals)).cloned().collect::<Vec<(f32, usize)>>();
+      let mut current_tournament = fitness_values_with_index.choose_multiple(&mut prng, min(tournament_size, number_individuals)).map(|&x| x).collect::<Vec<(f32, usize)>>();
       current_tournament.sort_unstable_by(|a, b| b.partial_cmp(a).unwrap_or(Ordering::Equal));
       selected_indices.push(current_tournament[0].1);
   };

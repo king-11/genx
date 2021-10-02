@@ -33,7 +33,7 @@ pub fn swap_mutation(individual: &mut Vec<bool>, seed: Option<u64>) -> Result<()
       fitness_values_with_index.push((value, i));
   };
 
-  let selected_indices = fitness_values_with_index.choose_multiple(&mut prng, 2).cloned().collect::<Vec<(bool,usize)>>();
+  let selected_indices = fitness_values_with_index.choose_multiple(&mut prng, 2).map(|&x| x).collect::<Vec<(bool,usize)>>();
   individual[selected_indices[0].1] = selected_indices[1].0;
   individual[selected_indices[1].1] = selected_indices[0].0;
 
