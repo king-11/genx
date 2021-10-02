@@ -92,3 +92,5 @@
 pub mod mutation;
 
 pub mod selection;
+
+pub mod crossover;
