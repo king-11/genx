@@ -1,4 +1,4 @@
-use std::{mem::swap};
+use std::mem::swap;
 
 use rand::{Rng, SeedableRng, rngs::StdRng, seq::SliceRandom};
 

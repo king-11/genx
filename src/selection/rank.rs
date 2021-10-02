@@ -37,11 +37,11 @@ pub fn rank_selection(fitness_values: &Vec<f32>, num_parents: usize, seed: Optio
       if i == 0 {
           continue;
       }
-      if fitness_values_with_index[i].0 != fitness_values_with_index[i-1].0 {
-          ranks.push(ranks[i-1] + 1);
+      if fitness_values_with_index[i].0 == fitness_values_with_index[i-1].0 {
+          ranks.push(ranks[i-1]);
       }
       else {
-          ranks.push(ranks[i-1]);
+          ranks.push(ranks[i-1] + 1);
       }
       sum_of_fitness += ranks[i];
   };
