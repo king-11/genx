@@ -4,7 +4,7 @@ use rand::{Rng, SeedableRng, rngs::StdRng, seq::SliceRandom};
 
 /**
 ## Description
-Scramble mutation is a mutation only for binary encoded individuals.
+Scramble mutation is a mutation only for vector encoded individuals.
 Given the `individual` it randomly generates two indices and then
 shuffles the values between those two indices.
 
@@ -21,7 +21,7 @@ _Note: The function can also take in an optional `seed` value of type `Option<u6
   assert_ne!(original_individual, individual);
 ```
 */
-pub fn scramble_mutation(individual: &mut Vec<bool>, seed: Option<u64>) {
+pub fn scramble_mutation<T>(individual: &mut Vec<T>, seed: Option<u64>) {
   let mut prng = match seed {
     Some(val) => StdRng::seed_from_u64(val),
     None => StdRng::from_entropy()
