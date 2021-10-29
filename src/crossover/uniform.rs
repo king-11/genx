@@ -1,5 +1,5 @@
 use itertools::multizip;
-use rand::{rngs::StdRng, Rng, SeedableRng};
+use rand::{SeedableRng, distributions::Uniform, prelude::Distribution, rngs::StdRng};
 use std::mem::swap;
 
 use super::check_length;
@@ -7,6 +7,7 @@ use super::check_length;
 pub fn uniform_crossover(
     parent1: &Vec<bool>,
     parent2: &Vec<bool>,
+    probability: f64,
     seed: Option<u64>,
 ) -> (Vec<bool>, Vec<bool>) {
     check_length(parent1, parent2);
@@ -17,11 +18,10 @@ pub fn uniform_crossover(
     };
 
 
-    let n = parent1.len();
-    let mask = (0..n).map(|_| prng.gen_bool(0.5)).collect::<Vec<bool>>();
+    let mask = Uniform::from(0.0..1.0);
     let (mut child1, mut child2) = (parent1.clone(), parent2.clone());
-    for (val1, val2, mask_val) in multizip((&mut child1, &mut child2, mask)) {
-        if mask_val {
+    for (val1, val2) in multizip((&mut child1, &mut child2)) {
+        if mask.sample(&mut prng) < probability {
             swap(val1, val2);
         }
     }

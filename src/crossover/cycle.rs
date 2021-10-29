@@ -1,5 +1,7 @@
 use std::collections::{HashMap, HashSet};
 
+use itertools::multizip;
+
 use super::{check_continuous, check_length};
 
 pub fn cycle_crossover(parent1: &Vec<usize>, parent2: &Vec<usize>) -> (Vec<usize>, Vec<usize>) {
@@ -11,9 +13,9 @@ pub fn cycle_crossover(parent1: &Vec<usize>, parent2: &Vec<usize>) -> (Vec<usize
 
   let (mut map1, mut map2) = (HashMap::new(), HashMap::new());
 
-  for (idx, &x) in parent1.iter().enumerate() {
-    map1.insert(x, idx);
-    map2.insert(parent2[idx], idx);
+  for (idx, (&val1, &val2)) in multizip((parent1, parent2)).enumerate() {
+    map1.insert(val1, idx);
+    map2.insert(val2, idx);
   }
 
   let (mut child1, mut child2) = (parent2.clone(), parent1.clone());
@@ -23,7 +25,7 @@ pub fn cycle_crossover(parent1: &Vec<usize>, parent2: &Vec<usize>) -> (Vec<usize
   while !set.get(&current_val.0).is_some() {
     set.insert(current_val.0);
     child1[current_val.1] = parent1[current_val.1];
-    current_val = (parent2[current_val.1], *map1.get(&parent2[current_val.1]).unwrap())
+    current_val = (parent2[current_val.1], map1[&parent2[current_val.1]])
   }
 
   set.clear();
@@ -31,12 +33,9 @@ pub fn cycle_crossover(parent1: &Vec<usize>, parent2: &Vec<usize>) -> (Vec<usize
   while !set.get(&current_val.0).is_some() {
     set.insert(current_val.0);
     child2[current_val.1] = parent2[current_val.1];
-    current_val = (parent1[current_val.1], *map2.get(&parent1[current_val.1]).unwrap())
+    current_val = (parent1[current_val.1], map2[&parent1[current_val.1]])
   }
   set.clear();
-
-  println!("{:?}", child1);
-  println!("{:?}", child2);
 
   (child1, child2)
 }
