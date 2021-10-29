@@ -1,6 +1,6 @@
 [package]
 name = "genx"
-version = "0.3.2"
+version = "0.3.3"
 authors = ["Lakshya Singh <lakshay.singh1108@gmail.com>"]
 edition = "2018"
 include = [
