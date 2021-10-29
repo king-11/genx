@@ -1,5 +1,3 @@
-use std::collections::HashMap;
-
 use super::{check_continuous, check_length};
 
 use rand::{SeedableRng, prelude::IteratorRandom, rngs::StdRng};
@@ -19,44 +17,28 @@ pub fn partially_mapped_crossover(parent1: &Vec<usize>, parent2: &Vec<usize>, se
 
   let mut selected = (0..n).map(|x| x).choose_multiple(&mut prng, 2);
   selected.sort();
-  let mut mapping1:HashMap<usize, usize> = HashMap::new();
-  let mut mapping2:HashMap<usize, usize> = HashMap::new();
-  let (mut child1, mut child2) = (Vec::with_capacity(n), Vec::with_capacity(n));
+  let (mut idx1, mut idx2) = (parent1.clone(), parent2.clone());
   for i in 0..n {
-    if i < selected[0] || i > selected[1] {
-      child1.push(parent1[i]);
-      child2.push(parent2[i]);
-    }
-    else {
-      child1.push(parent2[i]);
-      child2.push(parent1[i]);
-      mapping1.insert(parent2[i], parent1[i]);
-      mapping2.insert(parent1[i], parent2[i]);
-    }
+    idx1[parent1[i]] = i;
+    idx2[parent2[i]] = i;
   }
+  let (mut child1, mut child2) = (parent1.clone(), parent2.clone());
 
-  mapping1 = simplify_mapping(mapping1);
-  mapping2 = simplify_mapping(mapping2);
+  for i in selected[0]..=selected[1] {
+    let (val1, val2) = (child1[i], child2[i]);
 
-  for i in 0..n {
-    if i < selected[0] || i > selected[1] {
-      child1[i] = mapping1.get(&child1[i]).unwrap_or(&child1[i]).clone();
-      child2[i] = mapping2.get(&child2[i]).unwrap_or(&child2[i]).clone();
-    }
+    child1[i] = val2;
+    child1[idx1[val2]] = val1;
+    child2[i] = val1;
+    child2[idx2[val1]] = val2;
+
+    let temp = (idx1[val1], idx1[val2]);
+    idx1[val1] = temp.1;
+    idx1[val2] = temp.0;
+    let temp = (idx2[val1], idx2[val2]);
+    idx2[val1] = temp.1;
+    idx2[val2] = temp.0;
   }
 
   (child1, child2)
-}
-
-fn simplify_mapping(mapping: HashMap<usize, usize>) -> HashMap<usize, usize> {
-  let mut simplified = HashMap::new();
-  for (key, val) in mapping.iter() {
-    let mut temp_val = val;
-    while mapping.contains_key(temp_val) {
-      temp_val = mapping.get(temp_val).unwrap();
-    }
-    simplified.insert(*key, *temp_val);
-  }
-
-  simplified
 }
