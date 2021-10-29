@@ -9,8 +9,8 @@ mod tests {
       let num_parents:usize = 10;
       let fitness_values = vec![2.4,5.6,2.3,1.2,0.6,4.4,2.3,5.6,10.0,0.2,9.0,4.8,7.7,8.4,3.2,9.4,9.0,11.0,4.5];
 
-      let result = random_selection(&fitness_values, num_parents, Some(42)).iter().map(|&a| fitness_values[a]).collect::<Vec<f32>>();
-      assert_eq!(result,[9.0, 9.0, 7.7, 3.2, 9.0, 2.3, 2.4, 5.6, 0.6, 2.4]);
+      let result = random_selection(fitness_values.len(), num_parents, Some(42)).iter().map(|&a| fitness_values[a]).collect::<Vec<f32>>();
+      assert_eq!(result,[2.4, 9.0, 2.3, 7.7, 0.6, 4.4, 4.8, 8.4, 10.0, 0.2]);
     }
 
     #[test]

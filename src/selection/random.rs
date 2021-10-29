@@ -1,4 +1,6 @@
-use rand::{rngs::StdRng, SeedableRng, Rng};
+use std::cmp::min;
+
+use rand::{SeedableRng, prelude::IteratorRandom, rngs::StdRng};
 
 /**
 ## Description
@@ -18,19 +20,13 @@ The return value is a `Vec<usize>` pointing to the selected indices.
   let num_parents:usize = 10;
   let fitness_values = vec![10.0,0.2,9.0,4.8,7.7,8.4,3.2,9.4,9.0,11.0,4.5];
 
-  let result = random_selection(&fitness_values, num_parents, None);
+  let result = random_selection(fitness_values.len(), num_parents, None);
 ```
 */
-pub fn random_selection(fitness_values: &Vec<f32>, num_parents: usize, seed: Option<u64>) -> Vec<usize> {
-  let population_size = fitness_values.len();
+pub fn random_selection(population_size: usize, num_parents: usize, seed: Option<u64>) -> Vec<usize> {
   let mut prng = match seed {
     Some(val) => StdRng::seed_from_u64(val),
     None => StdRng::from_entropy()
   };
-  let mut selected_indices:Vec<usize> = Vec::new();
-  for _ in 0..num_parents {
-      let val = prng.gen_range(0..population_size);
-      selected_indices.push(val);
-  };
-  selected_indices
+  (0..population_size).map(|x| x).choose_multiple(&mut prng, min(num_parents, population_size))
 }
