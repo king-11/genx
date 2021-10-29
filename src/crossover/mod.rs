@@ -20,6 +20,8 @@ pub mod blend;
 
 pub mod simulated_binary;
 
+pub mod uniform_partially_mapped;
+
 pub use self::single_point::single_point_crossover;
 
 pub use self::multi_point::multi_point_crossover;
@@ -30,7 +32,7 @@ pub use self::uniform::uniform_crossover;
 
 pub use self::partially_mapped::partially_mapped_crossover;
 
-pub use self::order::davis_order_crossover;
+pub use self::order::order_crossover;
 
 pub use self::cycle::cycle_crossover;
 
@@ -39,6 +41,8 @@ pub use self::linear::linear_crossover;
 pub use self::blend::blend_crossover;
 
 pub use self::simulated_binary::simulated_binary_crossover;
+
+pub use self::uniform_partially_mapped::uniform_partially_mapped_crossover;
 
 fn check_continuous(vec: &Vec<usize>) -> bool {
   let n = vec.len();
