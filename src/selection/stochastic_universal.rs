@@ -1,4 +1,4 @@
-use rand::{rngs::StdRng, SeedableRng, Rng};
+use rand::{rngs::StdRng, Rng, SeedableRng};
 
 /**
 ## Description
@@ -23,33 +23,40 @@ The return value is a `Vec<usize>` pointing to the selected indices.
   let result = stochastic_universal_selection(&fitness_values, num_parents, None);
 ```
 */
-pub fn stochastic_universal_selection(fitness_values: &Vec<f32>, num_parents: usize, seed: Option<u64>) -> Vec<usize> {
-  let sum_of_fitness = fitness_values.iter().sum::<f32>();
-  let mut fitness_scale:Vec<f32> = Vec::new();
-  for (idx, &val) in fitness_values.iter().enumerate() {
-    if idx == 0 {
-      fitness_scale.push(val);
+pub fn stochastic_universal_selection(
+    fitness_values: &Vec<f32>,
+    num_parents: usize,
+    seed: Option<u64>,
+) -> Vec<usize> {
+    let sum_of_fitness = fitness_values.iter().sum::<f32>();
+    let mut fitness_scale: Vec<f32> = Vec::new();
+    let mut back: f32 = 0.0;
+    for (idx, &val) in fitness_values.iter().enumerate() {
+        if idx == 0 {
+            back = val;
+            fitness_scale.push(back);
+        } else {
+            back = val + back;
+            fitness_scale.push(back);
+        }
     }
-    else {
-      fitness_scale.push(val + fitness_scale[idx-1]);
-    }
-  };
 
-  let fitness_step = sum_of_fitness / num_parents as f32;
-
-  let mut prng = match seed {
-    Some(val) => StdRng::seed_from_u64(val),
-    None => StdRng::from_entropy()
-  };
-  let mut random_offset = prng.gen_range(0.0..fitness_step);
-  let mut current_offset = 0usize;
-  let mut selected_indices:Vec<usize> = Vec::new();
-  for _ in 0..num_parents {
-    while fitness_scale[current_offset] < random_offset {
-      current_offset += 1;
+    let fitness_step = sum_of_fitness / num_parents as f32;
+    let mut prng = match seed {
+        Some(val) => StdRng::seed_from_u64(val),
+        None => StdRng::from_entropy(),
+    };
+    let mut random_offset = prng.gen_range(0.0..fitness_step);
+    let random_inital = random_offset;
+    let mut current_offset = 0usize;
+    let mut selected_indices: Vec<usize> = Vec::new();
+    for i in 0..num_parents {
+        while fitness_scale[current_offset] < i as f32 * fitness_step + random_inital {
+            current_offset += 1;
+        }
+        selected_indices.push(current_offset);
+        random_offset += fitness_step;
     }
-    selected_indices.push(current_offset);
-    random_offset += fitness_step;
-  };
-  selected_indices
+
+    selected_indices
 }
