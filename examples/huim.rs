@@ -128,6 +128,6 @@ fn main() {
         if fitness_function(&best, &cost) > fitness_function(&best_now, &cost) {
             best_now = best;
         }
-        println!("Fitness {}", fitness_function(&best_now, &cost));
+        println!("Fitness {}", fitness_function(&best_now,&cost));
     }
 }
