@@ -1,10 +1,11 @@
 [package]
 name = "genx"
-version = "0.3.3"
+version = "0.4.0"
 authors = ["Lakshya Singh <lakshay.singh1108@gmail.com>"]
 edition = "2018"
 include = [
   "src/**/*",
+  "examples/*.rs",
   "Cargo.toml",
   "README.md",
   "LICENSE"
@@ -12,7 +13,8 @@ include = [
 homepage = "https://github.com/king-11/genx"
 description = "An easy to use and modular genetic algorithms library."
 repository = "https://github.com/king-11/genx"
-keywords = ["genetic", "evolutionary", "algorithm", "selection", "mutation"]
+keywords = ["genetic", "evolutionary", "algorithm", "optimization", "ml"]
+categories = ["algorithms", "mathematics", "science"]
 readme = "README.md"
 license = "MIT"
 

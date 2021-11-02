@@ -72,7 +72,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-genx = "0.3.3"
+genx = "0.4.0"
 ```
 
 If you are not using Rust 2018 edition add this to your crate root:
