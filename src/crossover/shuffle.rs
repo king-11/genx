@@ -21,9 +21,9 @@ pub fn shuffle_crossover(parent1: &Vec<bool>, parent2: &Vec<bool>, seed: Option<
   let mut child1 = (0..parent1.len()).map(|_| false).collect::<Vec<bool>>();
   let mut child2 = (0..parent2.len()).map(|_| false).collect::<Vec<bool>>();
 
-  for &index in indices.iter() {
-    child1[index] = shuffled_child1[index];
-    child2[index] = shuffled_child2[index];
+  for (idx, &index) in indices.iter().enumerate() {
+    child1[index] = shuffled_child1[idx];
+    child2[index] = shuffled_child2[idx];
   };
 
   return (child1, child2);
