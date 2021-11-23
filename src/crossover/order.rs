@@ -1,6 +1,26 @@
 use super::{check_continuous, check_length};
 use rand::{prelude::IteratorRandom, rngs::StdRng, SeedableRng};
 
+/**
+## Description:
+It constructs an offspring by choosing a substring of one parent and preserving the relative order
+of the elements of the other parent.
+
+### Note:
+- The function can also take in an optional `seed` value of type `Option<u64>` for deterministic results.
+
+## Return:
+The return value is a tuple containing two offsprings of type `Vec<usize>`
+
+## Example:
+```rust
+use genx::crossover::order_crossover;
+
+let parent1 = vec![1, 3, 4, 7, 0, 2, 6, 5];
+let parent2 = vec![2, 3, 4, 0, 7, 6, 1, 5];
+let (child1, child2) = order_crossover(&parent1, &parent2, None);
+```
+ */
 pub fn order_crossover(
     parent1: &Vec<usize>,
     parent2: &Vec<usize>,

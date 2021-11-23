@@ -2,6 +2,29 @@ use rand::{SeedableRng, prelude::SliceRandom, rngs::StdRng};
 
 use super::{check_length, single_point_crossover};
 
+/**
+## Description:
+Shuffle Crossover selects the two parents for crossover. It firstly randomly shuffles the genes in
+the both parents but in the same way. Then it applies the 1-Point crossover technique by randomly
+selecting a point as crossover point and then combines both parents to create two offspring. After
+performing 1-point crossover the genes in offspring are then unshuffled in same way as they have
+been shuffled.
+
+### Note:
+- The function can also take in an optional `seed` value of type `Option<u64>` for deterministic results.
+
+## Return:
+The return value is a tuple containing two offsprings of type `Vec<bool>`
+
+## Example:
+```rust
+use genx::crossover::shuffle_crossover;
+
+let parent1 = vec![true, false, false, true, true, false, false, true];
+let parent2 = vec![true, true, true, false, true, false, true, true];
+let (child1, child2) = shuffle_crossover(&parent1, &parent2, None);
+```
+ */
 pub fn shuffle_crossover(parent1: &Vec<bool>, parent2: &Vec<bool>, seed: Option<u64>) -> (Vec<bool>, Vec<bool>) {
   check_length(parent1, parent2);
 

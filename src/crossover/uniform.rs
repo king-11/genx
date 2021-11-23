@@ -4,6 +4,28 @@ use std::mem::swap;
 
 use super::check_length;
 
+/**
+## Description:
+Uniform crossover selects the two parents for crossover. It creates two child offspring of n genes
+selected from both of the parents uniformly. The random real number decides whether the first child
+select the ith genes from first or second parent.
+
+### Note:
+- The function takes a float value `probability` in the range [0.0 - 1.0] representing the bias.
+- The function can also take in an optional `seed` value of type `Option<u64>` for deterministic results.
+
+## Return:
+The return value is a tuple containing two offsprings of type `Vec<bool>`
+
+## Example:
+```rust
+use genx::crossover::uniform_crossover;
+
+let parent1 = vec![true, false, false, true, true, false, false, true];
+let parent2 = vec![true, true, true, false, true, false, true, true];
+let (child1, child2) = uniform_crossover(&parent1, &parent2, 0.6, None);
+```
+ */
 pub fn uniform_crossover(
     parent1: &Vec<bool>,
     parent2: &Vec<bool>,
