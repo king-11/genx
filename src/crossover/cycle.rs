@@ -6,9 +6,10 @@ use super::{check_continuous, check_length};
 
 /**
 ## Description:
-It uses the random crossover points to combine the parents same as per 1-Point crossover.
-To provide the great combination of parents it selects more than one crossover points to create the
-offspring or child.
+It identifies a number of so-called cycles between two parent chromosomes. Then, to form Child 1,
+cycle one is copied from parent 1, cycle 2 from parent 2, cycle 3 from parent 1, and so on. It
+attempts to create an offspring from the parents where every position is occupied by a corresponding
+element from one of the parents.
 
 ## Return:
 The return value is a tuple containing two offsprings of type `Vec<usize>`
