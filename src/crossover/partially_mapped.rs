@@ -2,6 +2,27 @@ use super::{check_continuous, check_length};
 
 use rand::{SeedableRng, prelude::IteratorRandom, rngs::StdRng};
 
+/**
+## Description:
+It transmits ordering and values information from the parent strings to the offspring. A portion of
+one parent string is mapped onto a portion of the other parent string and the remaining information
+is exchanged.
+
+### Note:
+- The function can also take in an optional `seed` value of type `Option<u64>` for deterministic results.
+
+## Return:
+The return value is a tuple containing two offsprings of type `Vec<usize>`
+
+## Example:
+```rust
+use genx::crossover::partially_mapped_crossover;
+
+let parent1 = vec![1, 3, 4, 7, 0, 2, 6, 5];
+let parent2 = vec![2, 3, 4, 0, 7, 6, 1, 5];
+let (child1, child2) = partially_mapped_crossover(&parent1, &parent2, None);
+```
+ */
 pub fn partially_mapped_crossover(parent1: &Vec<usize>, parent2: &Vec<usize>, seed: Option<u64>) -> (Vec<usize>, Vec<usize>) {
   check_length(parent1, parent2);
 

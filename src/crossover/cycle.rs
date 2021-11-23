@@ -4,6 +4,24 @@ use itertools::multizip;
 
 use super::{check_continuous, check_length};
 
+/**
+## Description:
+It uses the random crossover points to combine the parents same as per 1-Point crossover.
+To provide the great combination of parents it selects more than one crossover points to create the
+offspring or child.
+
+## Return:
+The return value is a tuple containing two offsprings of type `Vec<usize>`
+
+## Example:
+```rust
+use genx::crossover::cycle_crossover;
+
+let parent1 = vec![1, 3, 4, 7, 0, 2, 6, 5];
+let parent2 = vec![2, 3, 4, 0, 7, 6, 1, 5];
+let (child1, child2) = cycle_crossover(&parent1, &parent2);
+```
+ */
 pub fn cycle_crossover(parent1: &Vec<usize>, parent2: &Vec<usize>) -> (Vec<usize>, Vec<usize>) {
   check_length(parent1, parent2);
 

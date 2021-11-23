@@ -2,6 +2,28 @@ use rand::{rngs::StdRng, seq::SliceRandom, SeedableRng};
 
 use super::check_length;
 
+/**
+## Description:
+It uses the random crossover points to combine the parents same as per 1-Point crossover.
+To provide the great combination of parents it selects more than one crossover points to create the
+offspring or child.
+
+### Note:
+- The function takes an integer `k` denoting the number of crossover points.
+- The function can also take in an optional `seed` value of type `Option<u64>` for deterministic results.
+
+## Return:
+The return value is a tuple containing two offsprings of type `Vec<bool>`
+
+## Example:
+```rust
+use genx::crossover::multi_point_crossover;
+
+let parent1 = vec![true, false, false, true, true, false, false, true];
+let parent2 = vec![true, true, true, false, true, false, true, true];
+let (child1, child2) = multi_point_crossover(&parent1, &parent2, 3, None);
+```
+ */
 pub fn multi_point_crossover(
     parent1: &Vec<bool>,
     parent2: &Vec<bool>,
