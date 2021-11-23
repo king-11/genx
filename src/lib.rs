@@ -32,7 +32,7 @@
 //!
 //! ### Mutation
 //!
-//! Mutation function takes in a single individual, distribution index and returns in the mutated individual using [polynomial mutation](https://www.iitk.ac.in/kangal/papers/k2012016.pdf) for real valued individual.
+//! Mutation function takes in a single individual, distribution index, max_perturbation  and returns in the mutated individual using [polynomial mutation](https://www.iitk.ac.in/kangal/papers/k2012016.pdf) for real valued individual.
 //!
 //! ```rust
 //! use genx::mutation::polynomial::polynomial_mutation;
@@ -61,8 +61,10 @@
 //! ### Available Building Blocks
 //!
 //! The building blocks available in the crate (defined as traits) are:
-//! - **Selection**
-//! - **Mutation**
+//! - **[`selection`]**
+//! - **[`mutation`]**
+//! - **[`crossover`]**
+//! - **[`scaling`]**
 //!
 //! This crate provides multiple implementations for each one of those operators.
 //! So one can experiment with combining the different implementations to compose
@@ -72,7 +74,7 @@
 //! Add this to your `Cargo.toml`:
 //! ```toml
 //! [dependencies]
-//! genx = "0.3.3"
+//! genx = "0.4.0"
 //! ```
 //! If you are not using Rust 2018 edition add this to your crate root:
 //! ```rust
@@ -94,3 +96,5 @@ pub mod mutation;
 pub mod selection;
 
 pub mod crossover;
+
+pub mod scaling;
