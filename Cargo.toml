@@ -23,3 +23,30 @@ license = "MIT"
 [dependencies]
 rand = "0.8.4"
 itertools = "0.10.1"
+chrono = "0.4.19"
+rayon = "1.5.1"
+
+[dev-dependencies]
+galvanic-assert = "0.8"
+proptest = "1"
+version-sync = "0.9"
+
+[[example]]
+name = "knapsack"
+path = "examples/knp.rs"
+
+[[example]]
+name = "travelling_salesman"
+path = "examples/tsp.rs"
+
+[[example]]
+name = "2nd_degree_polynomial"
+path = "examples/eqn.rs"
+
+[[example]]
+name = "n_degree_polynomial"
+path = "examples/gen_eqn.rs"
+
+[[example]]
+name = "high_utility_item_mining"
+path = "examples/huim.rs"

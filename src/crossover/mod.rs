@@ -43,15 +43,9 @@
 //! You can read more about selection schemas and their working from the [research paper](http://ictactjournals.in/paper/IJSC_V6_I1_paper_4_pp_1083_1092.pdf)
 use std::collections::HashSet;
 
-pub mod single_point;
-
-pub mod multi_point;
-
-pub mod shuffle;
+pub mod generic;
 
 pub mod uniform;
-
-pub mod partially_mapped;
 
 pub mod order;
 
@@ -63,19 +57,11 @@ pub mod blend;
 
 pub mod simulated_binary;
 
-pub mod uniform_partially_mapped;
-
-pub use self::single_point::single_point_crossover;
-
-pub use self::multi_point::multi_point_crossover;
-
-pub use self::shuffle::shuffle_crossover;
+pub use self::generic::*;
 
 pub use self::uniform::uniform_crossover;
 
-pub use self::partially_mapped::partially_mapped_crossover;
-
-pub use self::order::order_crossover;
+pub use self::order::*;
 
 pub use self::cycle::cycle_crossover;
 
@@ -84,8 +70,6 @@ pub use self::linear::linear_crossover;
 pub use self::blend::blend_crossover;
 
 pub use self::simulated_binary::simulated_binary_crossover;
-
-pub use self::uniform_partially_mapped::uniform_partially_mapped_crossover;
 
 fn check_continuous(vec: &Vec<usize>) -> bool {
   let n = vec.len();
