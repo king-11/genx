@@ -5,10 +5,7 @@
 //! The provided functions are organized in sub-modules
 //! named after the utilized selection method:
 //! * `random`
-//! * `rank`
-//! * `roulette_wheel`
-//! * `steady_state`
-//! * `stochastic_universal`
+//! * `proportionate`
 //! * `tournament`
 //!
 //! All the functions take in atleast two arguments a Vector of floating
@@ -20,20 +17,11 @@
 
 pub mod random;
 
-pub mod rank;
-
-pub mod roulette_wheel;
-
-pub mod steady_state;
-
-pub mod stochastic_universal;
-
 pub mod tournament;
 
+pub mod proportionate;
+
 // Re-exports
-pub use self::random::random_selection;
-pub use self::rank::rank_selection;
-pub use self::roulette_wheel::roulette_wheel_selection;
-pub use self::steady_state::steady_state_selection;
-pub use self::stochastic_universal::stochastic_universal_selection;
-pub use self::tournament::tournament_selection;
+pub use self::random::RandomSelector;
+pub use self::tournament::TournamentSelector;
+pub use self::proportionate::*;

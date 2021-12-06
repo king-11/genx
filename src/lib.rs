@@ -98,3 +98,18 @@ pub mod selection;
 pub mod crossover;
 
 pub mod scaling;
+
+pub mod genetic;
+
+pub mod encoding;
+
+pub mod algorithm;
+
+pub mod random;
+pub mod population;
+
+pub mod operator;
+
+pub mod reinsertion;
+
+pub mod prelude;
