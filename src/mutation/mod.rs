@@ -31,22 +31,13 @@
 //! take in the floating point value of individual and return
 //! the mutated value.
 
-pub mod flipping;
+pub mod binary;
 
-pub mod inversion;
+pub mod value;
 
-pub mod polynomial;
-
-pub mod random;
-
-pub mod scramble;
-
-pub mod swap;
+pub mod order;
 
 // Re-exports
-pub use self::flipping::flipping_mutation;
-pub use self::inversion::inversion_mutation;
-pub use self::polynomial::polynomial_mutation;
-pub use self::random::random_mutation;
-pub use self::scramble::scramble_mutation;
-pub use self::swap::swap_mutation;
+pub use self::binary::*;
+pub use self::value::*;
+pub use self::order::*;

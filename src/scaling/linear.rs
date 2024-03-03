@@ -1,32 +1,66 @@
-use std::cmp::Ordering;
+use crate::{
+    algorithm::EvaluatedPopulation,
+    operator::{GeneticOperator, ScalingOp},
+    prelude::{Fitness, Genotype}, genetic::AsScalar,
+};
 
-pub fn linear_scaling(fitness_values: &mut Vec<f32>, scaling_factor: f32) {
-    let minimum_fitness = fitness_values
-        .iter()
-        .min_by(|a, b| a.partial_cmp(b).unwrap_or(Ordering::Equal))
-        .unwrap();
-    let maximum_fitness = fitness_values
-        .iter()
-        .max_by(|a, b| a.partial_cmp(b).unwrap_or(Ordering::Equal))
-        .unwrap();
-    let average_fitness = fitness_values.iter().sum::<f32>() / (fitness_values.len() as f32);
-    if average_fitness == 0.0 {
-        for x in fitness_values {
-            *x = 1.0;
-        }
-        return;
-    }
-    let mut a = (average_fitness * (scaling_factor - 1.0)) / (maximum_fitness - average_fitness);
-    let mut b = (average_fitness * (maximum_fitness - scaling_factor * average_fitness))
-        / (maximum_fitness - average_fitness);
+#[derive(Debug, Clone)]
+pub struct LinearScaler {
+    scalling_factor: f64,
+}
 
-    if *minimum_fitness <= -1.0 * b / a {
-        a = average_fitness / (average_fitness - minimum_fitness);
-        b = -1.0 * minimum_fitness * average_fitness / (average_fitness - minimum_fitness);
+impl LinearScaler {
+    pub fn new(scalling_factor: f64) -> LinearScaler {
+        LinearScaler { scalling_factor }
     }
 
-    let linear_function = |x:f32| a*x + b;
-    for x in fitness_values {
-      *x = linear_function(*x);
+    pub fn scaling_factor(&self) -> f64 {
+        self.scalling_factor
+    }
+
+    pub fn set_scaling_factor(&mut self, scalling_factor: f64) {
+        self.scalling_factor = scalling_factor;
+    }
+}
+
+impl GeneticOperator for LinearScaler {
+    fn name() -> String {
+        String::from("Linear-Scaling")
+    }
+}
+
+impl<G, F> ScalingOp<G, F> for LinearScaler
+where
+    G: Genotype,
+    F: Fitness + AsScalar,
+{
+    fn scale(&self, population: EvaluatedPopulation<G, F>) -> EvaluatedPopulation<G, F> {
+        let individuals = population.individuals();
+
+        let min_fit = population.lowest_fitness().as_scalar();
+        let max_fit = population.highest_fitness().as_scalar();
+        let avg_fit = population.average_fitness().as_scalar();
+
+        let mut a =
+        (avg_fit * (self.scaling_factor() - 1.0)) / (max_fit - avg_fit);
+        let mut b = (avg_fit * (max_fit - self.scaling_factor() * avg_fit))
+        / (max_fit - avg_fit);
+
+        if min_fit <= -1.0 * b / a {
+            a = avg_fit / (avg_fit - min_fit);
+            b = -1.0 * min_fit * avg_fit / (avg_fit - min_fit);
+        };
+
+        let linear_functions = |x: f64| {
+            a * x + b
+        };
+
+        let fitness_values = population.fitness_values().iter().map(|x| {
+            linear_functions(x.as_scalar()).into()
+        }).collect::<Vec<F>>();
+
+        let min_fit = fitness_values.iter().min().unwrap();
+
+        EvaluatedPopulation::new(individuals, fitness_values.to_vec(), (max_fit*self.scaling_factor()).into(), min_fit.clone(), avg_fit.into())
     }
 }
